@@ -1,4 +1,4 @@
-/* style.css */
+/* style.css (Complete and Final Redo) */
 
 /* Base Styling & Variables */
 :root {
@@ -15,6 +15,8 @@
 }
 
 body {
+    /* CRITICAL FIX: Prevents horizontal scrolling caused by layout elements */
+    overflow-x: hidden; 
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -191,7 +193,7 @@ a:hover {
     color: white;
 }
 
-/* Primary Button */
+/* Primary Button (Base Style) */
 .btn-primary {
     display: flex;
     align-items: center;
@@ -208,8 +210,12 @@ a:hover {
     font-size: 0.9rem;
     border: none;
     cursor: pointer;
-    text-align: center; /* Ensure internal text is centered */
-    justify-content: center; /* Center content horizontally */
+    text-align: center;
+    justify-content: center;
+    /* Allows text inside to wrap to prevent overflow */
+    word-wrap: break-word; 
+    /* Ensures the button cannot push beyond its container */
+    max-width: 100%;
 }
 
 .btn-primary:hover {
@@ -371,7 +377,7 @@ a:hover {
     color: var(--accent-green);
 }
 
-/* Themes Grid */
+/* Themes Grid (Sessions) */
 .themes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -483,6 +489,18 @@ a:hover {
     border: 2px solid var(--primary-blue);
     gap: 3rem;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    /* FIX: Allows the flex container to wrap content vertically */
+    flex-wrap: wrap; 
+    justify-content: center; /* Center content when wrapped */
+}
+
+.callout-text {
+    /* Ensures the text box can shrink on mobile */
+    flex-grow: 1; 
+    min-width: 50%;
+    /* FIX: Ensure long text ("Final Call: Register Now!") wraps */
+    word-break: break-word; 
+    overflow-wrap: break-word;
 }
 
 .callout-text h3 {
@@ -500,8 +518,10 @@ a:hover {
 .register-big-btn {
     padding: 1.2rem 3rem;
     font-size: 1.1rem;
-    width: auto; /* Default size */
-    min-width: 300px;
+    width: auto; 
+    min-width: 300px; /* Base minimum width */
+    /* FIX: Ensure buttons don't push beyond the right edge on desktop/tablet */
+    max-width: 100%; 
 }
 
 .qr-code-box {
@@ -624,7 +644,7 @@ a:hover {
 .footer-nav {
     list-style: none;
     padding: 0;
-    margin: 0 auto 1rem; /* Center on large screens if not enough width */
+    margin: 0 auto 1rem;
     max-width: 500px;
     display: none; /* Hidden by default on large screens */
 }
@@ -697,7 +717,7 @@ a:hover {
 .notification-content {
     padding: 10px;
     display: block;
-    max-height: 450px; /* Max height for content */
+    max-height: 450px; 
     opacity: 1;
     transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out;
 }
@@ -732,184 +752,7 @@ a:hover {
 
 
 /* ----------------------------------- */
-/* 6. RESPONSIVE DESIGN                */
-/* ----------------------------------- */
-@media (max-width: 1100px) {
-    .hero-section {
-        flex-direction: column;
-        text-align: center;
-        min-height: auto;
-    }
-
-    .hero-content {
-        max-width: 100%;
-    }
-
-    .main-title {
-        font-size: 3.5rem;
-    }
-    
-    .hero-image {
-        max-width: 100%;
-    }
-
-    .hero-meta {
-        justify-content: center;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-    }
-}
-
-@media (max-width: 900px) {
-    .nav-links {
-        display: none; 
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--dark-bg-2);
-        padding: 1rem 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        z-index: 900;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .nav-links.active {
-        display: flex; 
-    }
-
-    .nav-links li {
-        width: 100%;
-        text-align: center;
-    }
-
-    .nav-links > li > a {
-        display: block;
-        padding: 1rem;
-        border-radius: 0;
-    }
-
-    .dropdown-content {
-        position: relative;
-        border-top: none;
-        border-radius: 0;
-        min-width: 100%;
-        box-shadow: none;
-    }
-
-    .btn-primary.nav-btn {
-        margin: 1rem auto;
-        padding: 1rem 2rem;
-    }
-    
-    .hamburger-menu {
-        display: block; 
-    }
-
-    .top-nav {
-        padding: 0.75rem 1rem;
-    }
-    
-    .nav-logo-text {
-        font-size: 1.2rem;
-    }
-    
-    .section {
-        padding: 2rem 1.5rem;
-    }
-    
-    .registration-callout {
-        flex-direction: column;
-        padding: 2rem;
-        text-align: center;
-    }
-    
-    .callout-text h3 {
-        font-size: 2rem;
-    }
-    
-    .register-big-btn {
-        width: 100%; /* Make the registration button full width */
-        min-width: 0;
-    }
-    
-    .qr-code-box {
-        margin-top: 2rem;
-        width: 180px;
-    }
-
-    /* Footer Navigation is shown on mobile screens */
-    .footer-nav {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        width: 100%;
-        margin-top: 1.5rem;
-    }
-
-    .footer-nav li a {
-        display: block;
-        padding: 8px 0;
-        border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
-    }
-}
-
-@media (max-width: 600px) {
-    .container {
-        padding: 5rem 1rem 1rem;
-    }
-
-    .main-title {
-        font-size: 2.5rem;
-    }
-
-    .subtitle {
-        font-size: 1.2rem;
-        padding-left: 10px;
-    }
-
-    .hero-meta {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-        text-align: left;
-        margin-bottom: 1rem;
-    }
-    
-    .section-icon {
-        font-size: 2.5rem;
-    }
-
-    .partner-card {
-        flex-basis: 40%;
-    }
-    
-    .social-links {
-        gap: 1rem;
-    }
-    
-    /* Responsive Floating Notification (Moves to top right) */
-    .floating-notification {
-        top: 70px; /* Below the fixed top nav */
-        bottom: auto;
-        right: 10px;
-        width: 90%;
-        max-width: 350px;
-        transition: all 0.3s ease-in-out;
-    }
-    
-    .floating-notification.minimized {
-        top: 70px;
-        width: 200px; /* Smaller when minimized */
-        right: 10px;
-    }
-}
-/* ----------------------------------- */
-/* 6. RESPONSIVE DESIGN (ENHANCED)     */
+/* 6. RESPONSIVE DESIGN (CRITICAL FIXES) */
 /* ----------------------------------- */
 
 /* Tablet and Smaller Desktop Fixes (Max width: 1100px) */
@@ -920,25 +763,10 @@ a:hover {
         min-height: auto;
     }
 
-    .hero-content {
-        max-width: 100%;
-    }
-
     .main-title {
         font-size: 3.5rem;
     }
     
-    .hero-image {
-        max-width: 100%;
-    }
-
-    .hero-meta {
-        justify-content: center;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-    }
-
-    /* FIX: Ensure two-column layout switches to single column earlier */
     .two-column-layout {
         grid-template-columns: 1fr;
     }
@@ -955,50 +783,15 @@ a:hover {
         left: 0;
         right: 0;
         background: var(--dark-bg-2);
-        padding: 1rem 0;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
         z-index: 900;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     }
 
-    .nav-links.active {
-        display: flex; 
-    }
-
-    .nav-links li {
-        width: 100%;
-        text-align: center;
-    }
-
-    .nav-links > li > a {
-        display: block;
-        padding: 1rem;
-        border-radius: 0;
-    }
-
-    .dropdown-content {
-        position: relative;
-        border-top: none;
-        border-radius: 0;
-        min-width: 100%;
-        box-shadow: none;
-    }
-
-    .btn-primary.nav-btn {
-        margin: 1rem auto;
-        padding: 1rem 2rem;
-    }
-    
     .hamburger-menu {
         display: block; 
     }
 
     .top-nav {
         padding: 0.75rem 1rem;
-    }
-    
-    .nav-logo-text {
-        font-size: 1.2rem;
     }
     
     .section {
@@ -1013,36 +806,31 @@ a:hover {
     
     .callout-text h3 {
         font-size: 2rem;
+        /* FIX: Ensure "Final Call: Register Now!" fits */
+        word-break: break-word; 
     }
     
+    /* FIX: Registration Button Scalability */
     .register-big-btn {
-        width: 100%; /* Make the registration button full width */
-        min-width: 0;
+        width: 100%; 
+        min-width: unset; 
     }
     
     .qr-code-box {
         margin-top: 2rem;
         width: 180px;
     }
+    
+    /* FIX: Grid (Sessions) switches to single column */
+    .themes-grid, .deadlines-grid {
+        grid-template-columns: 1fr; 
+    }
 
     /* Footer Navigation is shown on mobile screens */
     .footer-nav {
         display: flex;
         flex-direction: column;
-        text-align: center;
-        width: 100%;
         margin-top: 1.5rem;
-    }
-
-    .footer-nav li a {
-        display: block;
-        padding: 8px 0;
-        border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
-    }
-    
-    /* FIX: Theme Grid switches to single column for better content flow */
-    .themes-grid {
-        grid-template-columns: 1fr; 
     }
 }
 
@@ -1054,79 +842,34 @@ a:hover {
 
     .main-title {
         font-size: 2.5rem;
-    }
-
-    .subtitle {
-        font-size: 1.2rem;
-        padding-left: 10px;
-    }
-
-    .hero-meta {
-        flex-direction: column;
-        gap: 0.5rem;
+        word-break: break-word;
     }
     
     .section-title {
-        /* FIX: Prevents large titles from causing overflow */
         font-size: 1.8rem; 
-        text-align: left;
-        margin-bottom: 1rem;
-        /* Allow title to wrap if it's too long */
         word-break: break-word; 
+        /* FIX: Allow icon and text to wrap if the title is extremely long */
+        flex-wrap: wrap; 
+        gap: 0.5rem;
     }
     
     .section-icon {
-        font-size: 2rem; /* Smaller icon size */
+        font-size: 2rem; 
     }
 
-    .partner-card {
-        flex-basis: 40%;
-    }
-    
-    .social-links {
-        gap: 1rem;
-    }
-    
-    /* FIX: Make all buttons flexible and avoid fixed minimum widths */
+    /* FIX: General Button optimization for very small screens */
     .btn-primary {
-        /* This applies to all primary buttons including the very long ones */
-        padding: 0.8rem 1.5rem;
+        padding: 0.8rem 1.2rem;
         font-size: 0.85rem;
-        min-width: unset; /* Remove the desktop-specific min-width */
-        max-width: 100%; /* Ensure button cannot exceed screen width */
-        word-wrap: break-word; /* Allows long text inside the button to wrap if necessary */
+        min-width: unset; 
     }
     
-    .register-big-btn {
-        padding: 1rem 1.5rem;
-        font-size: 1rem;
-        min-width: 100%; /* Still wide, but won't overflow */
-    }
-
-    /* FIX: Deadlines grid switches to single column for better readability */
-    .deadlines-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Responsive Floating Notification (Moves to top right) */
+    /* FIX: Moves floating notification to top right to clear button space */
     .floating-notification {
-        top: 70px; /* Below the fixed top nav */
+        top: 70px; 
         bottom: auto;
         right: 10px;
         width: 90%;
         max-width: 350px;
-        transition: all 0.3s ease-in-out;
     }
-    
-    .floating-notification.minimized {
-        top: 70px;
-        width: 200px; /* Smaller when minimized */
-        right: 10px;
-    }
-}
-
-/* FIX: Ensure no element, including the body, causes horizontal scrolling */
-body {
-    /* Add this rule to the main body style to prevent any content from overflowing the viewport */
-    overflow-x: hidden; 
 }

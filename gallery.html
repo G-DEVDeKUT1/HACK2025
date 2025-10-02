@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Gallery - G-DEV Hack 2025</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* General Styling */
+        :root {
+            --primary-blue: #3282b8;
+            --dark-blue: #0f4c75;
+            --dark-bg-1: #0a0f1c;
+            --text-color-light: #f0f0f0;
+            --accent-red: #f44336;
+            --accent-green: #4CAF50;
+            --max-width: 1200px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg-1);
+            color: var(--text-color-light);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-header p {
+            color: var(--text-color-light);
+            font-size: 1.1rem;
+        }
+
+        /* Gallery Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .image-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .image-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 30px rgba(50, 130, 184, 0.5);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 300px; /* Uniform height for better grid look */
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.3s;
+        }
+
+        .image-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .image-card:hover .image-card-overlay {
+            opacity: 1;
+        }
+
+        .overlay-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+        
+        .overlay-description {
+            font-size: 0.9rem;
+            margin-top: 5px;
+            color: var(--text-color-light);
+        }
+        
+        /* Modal (Lightbox) Styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 1000px;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        #caption {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 1000px;
+            text-align: center;
+            color: #ccc;
+            padding: 10px 0;
+            height: 150px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--accent-red);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        /* Utility Classes */
+        .color-award { color: var(--accent-red); }
+        .color-presentation { color: var(--primary-blue); }
+        .color-kahoot { color: #f4d03f; } /* Yellow */
+        .color-food { color: var(--accent-green); }
+
+        /* Footer Placeholder */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-color-dim);
+            font-size: 0.85rem;
+        }
+
+        /* Mobile Adjustments */
+        @media only screen and (max-width: 700px){
+            .modal-content {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="gallery-header">
+            <h2>G-DEV Hack 2025 Photo Highlights</h2>
+            <p>Relive the action: Presentations, Awards, Fun, and Fuel!</p>
+            <p style="font-size: 0.9rem; color: var(--accent-red);">
+                NOTE: Please ensure the image files listed below are placed in the same folder as this HTML file.
+            </p>
+        </header>
+
+        <section class="image-grid">
+            
+            <div class="image-card" onclick="openModal(this)">
+                <img src="WhatsApp Image 2025-10-02 at 17.41.10_d7b7c5c9.jpg" alt="Award Session">
+                <div class="image-card-overlay" data-caption="The culmination of hard work—celebrating the top geospatial innovators!">
+                    <span class="overlay-title color-award">Award Session</span>
+                    <span class="material-icons-outlined color-award" style="font-size: 2rem;">emoji_events</span>
+                    <span class="overlay-description">Celebrating the winners and their innovative solutions.</span>
+                </div>
+            </div>
+
+            <div class="image-card" onclick="openModal(this)">
+                <img src="WhatsApp Image 2025-10-02 at 17.44.03_3ef34afd.jpg" alt="Guest Speaker / Presentations">
+                <div class="image-card-overlay" data-caption="Insightful moment with our keynote speaker, discussing the future of AI and GIS.">
+                    <span class="overlay-title color-presentation">Guest Time & Presentations</span>
+                    <span class="material-icons-outlined color-presentation" style="font-size: 2rem;">forum</span>
+                    <span class="overlay-description">Keynote speeches and knowledge sharing.</span>
+                </div>
+            </div>
+
+            <div class="image-card" onclick="openModal(this)">
+                <img src="WhatsApp Image 2025-10-02 at 17.41.40_e5f4545c.jpg" alt="Kahoot & Team Fun">
+                <div class="image-card-overlay" data-caption="Taking a quick break for a fun Kahoot challenge to keep the energy high!">
+                    <span class="overlay-title color-kahoot">Kahoot & Exercise</span>
+                    <span class="material-icons-outlined color-kahoot" style="font-size: 2rem;">quiz</span>
+                    <span class="overlay-description">Mid-hack fun and team-building exercise.</span>
+                </div>
+            </div>
+
+            <div class="image-card" onclick="openModal(this)">
+                <img src="WhatsApp Image 2025-10-02 at 17.39.23_8b080fc6.jpg" alt="Lunch Provided">
+                <div class="image-card-overlay" data-caption="Fueling the innovation with a delicious and much-needed lunch break.">
+                    <span class="overlay-title color-food">Lunch Provided</span>
+                    <span class="material-icons-outlined color-food" style="font-size: 2rem;">restaurant</span>
+                    <span class="overlay-description">A well-deserved break for food and networking.</span>
+                </div>
+            </div>
+
+            <div class="image-card" onclick="openModal(this)">
+                <img src="WhatsApp Image 2025-10-02 at 17.41.40_ccce5262.jpg" alt="Group Presentations">
+                <div class="image-card-overlay" data-caption="Teams showcasing their progress and preliminary findings to the mentors.">
+                    <span class="overlay-title color-presentation">Presentations & Group Work</span>
+                    <span class="material-icons-outlined color-presentation" style="font-size: 2rem;">groups</span>
+                    <span class="overlay-description">Pitching sessions and final project demos.</span>
+                </div>
+            </div>
+            
+        </section>
+
+    </div>
+
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 G-DEV Club DKUT. Gallery built for interactivity.</p>
+    </footer>
+
+    <script>
+        // Get the modal elements
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+
+        // Function to open the modal
+        function openModal(card) {
+            modal.style.display = "block";
+            
+            // Get data from the clicked card
+            var imgSrc = card.querySelector('img').src;
+            var imgAlt = card.querySelector('img').alt;
+            var dataCaption = card.querySelector('.image-card-overlay').getAttribute('data-caption');
+            
+            // Set modal content
+            modalImg.src = imgSrc;
+            captionText.innerHTML = '<strong>' + imgAlt + '</strong>: ' + dataCaption;
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            modal.style.display = "none";
+        }
+        
+        // Close the modal when the user clicks anywhere outside of the image
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
+</html>

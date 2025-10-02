@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluation Criteria - G-DEV Hack 2025</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Ensuring the footer sits at the bottom */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            flex-grow: 1;
+        }
+        .criteria-card {
+            background: linear-gradient(135deg, rgba(50, 130, 184, 0.1), rgba(15, 76, 117, 0.1));
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(50, 130, 184, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .criteria-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(50, 130, 184, 0.3);
+        }
+        
+        .score-badge {
+            display: inline-block;
+            background-color: var(--accent-red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="network-bg"></div>
+
+    <nav class="top-nav" style="position: static; border-bottom: 2px solid var(--accent-red);">
+        <div class="nav-logo">
+            <a href="index.html" class="logo-link">
+                <img src="Logo.png" alt="G-DEV Logo" class="nav-logo-icon">
+                <div class="nav-logo-text">G-DEV DEKUT HACK 2025</div>
+            </a>
+        </div>
+        <a href="index.html#register" class="btn-primary" style="font-size: 0.9rem;">Back to Registration</a>
+    </nav>
+
+    <div class="container">
+        <section class="section" id="evaluation-criteria">
+            <h2 class="section-title">
+                <span class="section-icon material-icons-outlined">model_training</span>
+                Project Evaluation Criteria
+            </h2>
+            <p class="section-description">
+                Projects will be judged by industry experts and alumni based on the following key metrics, totaling **100 points**. Focus on the innovative and practical application of Geospatial technology with a robust **AI component**.
+            </p>
+            
+            <div class="deadlines-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                
+                <div class="criteria-card" style="border-left: 5px solid var(--accent-green);">
+                    <i class="material-icons-outlined" style="font-size: 3rem; color: var(--accent-green);">memory</i>
+                    <h3 class="theme-title">AI & Geospatial Integration</h3>
+                    <div class="score-badge" style="background-color: var(--accent-green);">40%</div>
+                    <p>How effectively is the **AI model** used to process, analyze, or predict outcomes based on the **geospatial data**? Is the integration innovative and central to the solution?</p>
+                </div>
+                
+                <div class="criteria-card" style="border-left: 5px solid var(--primary-blue);">
+                    <i class="material-icons-outlined" style="font-size: 3rem; color: var(--primary-blue);">code</i>
+                    <h3 class="theme-title">Technical Execution</h3>
+                    <div class="score-badge" style="background-color: var(--primary-blue);">30%</div>
+                    <p>Quality of the code, stability of the application, and **demonstrable functionality** of the prototype. Assessment of chosen technologies and use of version control (Repo URL).</p>
+                </div>
+                
+                <div class="criteria-card" style="border-left: 5px solid var(--accent-red);">
+                    <i class="material-icons-outlined" style="font-size: 3rem; color: var(--accent-red);">trending_up</i>
+                    <h3 class="theme-title">Real-World Impact & Viability</h3>
+                    <div class="score-badge" style="background-color: var(--accent-red);">20%</div>
+                    <p>Potential to solve the chosen hackathon theme's problem effectively, **scalability**, and addressing a genuine market or community need within DeKUT or Kenya.</p>
+                </div>
+                
+                <div class="criteria-card" style="border-left: 5px solid var(--light-blue);">
+                    <i class="material-icons-outlined" style="font-size: 3rem; color: var(--light-blue);">present_to_all</i>
+                    <h3 class="theme-title">Presentation & Clarity</h3>
+                    <div class="score-badge" style="background-color: var(--dark-blue);">10%</div>
+                    <p>Clarity and professionalism of the video and documentation (PowerPoint/Report) submitted. Ability to succinctly explain the problem, solution, and technology stack.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem; text-align: center; background-color: rgba(255, 255, 255, 0.05); padding: 2rem; border-radius: 1.5rem; border: 1px dashed var(--primary-blue);">
+                <h3 style="color: var(--light-blue); margin-top: 0;"><i class="material-icons-outlined" style="vertical-align: middle; color: var(--accent-red);">gavel</i> Jury's Decision</h3>
+                <p style="font-size: 1.1rem; color: var(--text-color-light);">
+                    The evaluation process heavily weights **AI integration (40%)**, reflecting the core challenge of the G-DEV Hack 2025. Judges' decisions are final.
+                </p>
+                <p style="font-size: 1rem; color: var(--text-color-dim);">
+                    Review the official rules document for specific sub-criteria details.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-title">— Connect with G-DEV DEKUT —</div>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/g-dev-dekut-5689a2384/" target="_blank" rel="noopener noreferrer" class="social-link">
+                <span class="social-icon">💼</span>
+                LinkedIn
+            </a>
+            <a href="https://www.youtube.com/@G-DEVDEKUT" target="_blank" rel="noopener noreferrer" class="social-link">
+                <span class="social-icon">📺</span>
+                YouTube
+            </a>
+            <a href="https://x.com/GeospatialDev" target="_blank" rel="noopener noreferrer" class="social-link">
+                <span class="social-icon">🐦</span>
+                Twitter/X
+            </a>
+            <a href="mailto:gdevdekut@gmail.com" class="social-link">
+                <span class="social-icon">📧</span>
+                Email
+            </a>
+        </div>
+
+        <ul class="footer-nav">
+            <li><a href="index.html#themes">Hack Themes</a></li>
+            <li><a href="evaluation.html" target="_blank">Evaluation Criteria</a></li>
+            <li><a href="members.html" target="_blank">Team Center</a></li>
+            <li><a href="index.html#sponsors">Our Partners</a></li>
+        </ul>
+
+        <div class="contact-info">
+            <p><i class="material-icons">email</i> **Email:** gdevdekut@gmail.com</p>
+            <p><i class="material-icons">phone</i> **VC GDEV:** 0702781490</p>
+        </div>
+
+        <p class="copyright">&copy; 2025 G-DEV Club DKUT. All Rights Reserved. Built for Innovation.</p>
+    </footer>
+</body>
+</html>

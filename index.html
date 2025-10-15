@@ -8,19 +8,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Additional inline styling for new notification */
-        .notification-banner {
-            background: linear-gradient(90deg, #FFD700, #FFB300);
-            color: #000;
-            font-weight: 700;
-            text-align: center;
-            padding: 12px;
-            border-radius: 8px;
-            margin: 20px auto;
-            width: 95%;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-            animation: glow 2s infinite alternate;
-        }
+        /* CSS for the new pop-up notification to make it a responsive "pop-up image" */
+
+        /* Existing notification banner styling (now obsolete, but keeping the glow keyframes for reference if needed elsewhere) */
+        /* REMOVED: .notification-banner and its related styles */
         @keyframes glow {
             from { box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
             to { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
@@ -29,6 +20,109 @@
             font-weight: 600;
             color: #222;
         }
+
+        /* NEW POP-UP STYLES */
+        .floating-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px; /* Default size for desktop */
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+            border: 2px solid #007bff; /* Accent border */
+        }
+
+        .floating-notification.minimized {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #007bff; /* Primary color header */
+            color: white;
+            cursor: pointer;
+        }
+
+        .floating-notification.minimized .notification-header {
+            padding: 0; /* Minimized header is the whole circle */
+            height: 100%;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .notification-title {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .floating-notification.minimized .notification-title,
+        .floating-notification.minimized .notification-content {
+            display: none;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+        }
+
+        .floating-notification.minimized .toggle-btn {
+            background-color: transparent;
+            color: white;
+        }
+
+        .notification-content {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .notification-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .notification-btn {
+            display: block;
+            width: 90%;
+            margin: 0 auto 5px auto;
+            text-decoration: none;
+        }
+
+        /* Responsive adjustments for the pop-up */
+        @media (max-width: 600px) {
+            .floating-notification {
+                width: 90%; /* Take up more screen width on small devices */
+                right: 5%;
+                bottom: 15px;
+                max-width: none; /* Override any potential max-width from style.css */
+            }
+
+            .notification-title {
+                font-size: 0.9rem;
+            }
+
+            .floating-notification.minimized {
+                width: 45px;
+                height: 45px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -36,7 +130,7 @@
     
     <nav class="top-nav">
         <div class="nav-logo">
-            <a href="#hero" class="logo-link">
+            <a href="/" class="logo-link"> 
                 <img src="Logo.png" alt="G-DEV Logo" class="nav-logo-icon">
                 <div class="nav-logo-text">G-DEV DEKUT HACK 2025</div>
             </a>
@@ -92,12 +186,6 @@
                 <img src="MainPoster.jpg" alt="G-DEV Hackathon 2025 Main Poster Visual" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);">
             </div>
         </section>
-
-        <!-- 🔔 New Notification Banner -->
-        <div class="notification-banner">
-            📢 <strong>Registration Extended:</strong> Now open until <strong>17<sup>th</sup> October 2025</strong> — no one should be left out!<br>
-            🕖 <span class="countdown-text">Submit your team project requirements before <strong>25<sup>th</sup> October 2025, 7:00 PM</strong></span> using the same official form!
-        </div>
 
         <hr>
 
@@ -276,7 +364,7 @@
     </div>
     
     <div id="poster-notification" class="floating-notification">
-        <div class="notification-header">
+        <div class="notification-header" onclick="toggleNotification()">
             <span class="notification-title">✨ Final Call: Register Now!</span>
             <button onclick="toggleNotification()" class="toggle-btn" aria-label="Toggle Poster Visibility">
                 <i id="toggle-icon" class="material-icons">close</i>
@@ -316,6 +404,17 @@
                 toggleIcon.textContent = 'close';
             }
         }
+        
+        // Initial call to set the correct icon on load if the notification is minimized by default (though usually it's open)
+        // You might want to remove this if you want it to be initially open.
+        /*
+        document.addEventListener('DOMContentLoaded', () => {
+             const notification = document.getElementById('poster-notification');
+             if (notification.classList.contains('minimized')) {
+                 document.getElementById('toggle-icon').textContent = 'unfold_less';
+             }
+         });
+        */
     </script>
 </body>
 </html>
